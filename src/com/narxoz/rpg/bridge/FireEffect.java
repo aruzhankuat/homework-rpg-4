@@ -1,13 +1,8 @@
 package com.narxoz.rpg.bridge;
 
 public class FireEffect implements EffectImplementor {
-    @Override
-    public int computeDamage(int basePower) {
-        return Math.max(0, (int) Math.round(basePower * 1.2));
+    public void apply(String name, int power) {
+        System.out.println("Fire effect from " + name + " power: " + power);
     }
-
-    @Override
-    public String getEffectName() {
-        return "Fire";
-    }
+    public double getMultiplier() { return 1.5; }
 }
