@@ -1,13 +1,8 @@
 package com.narxoz.rpg.bridge;
 
 public class IceEffect implements EffectImplementor {
-    @Override
-    public int computeDamage(int basePower) {
-        return Math.max(0, (int) Math.round(basePower * 1.1));
+    public void apply(String name, int power) {
+        System.out.println("Ice effect from " + name + " power: " + power);
     }
-
-    @Override
-    public String getEffectName() {
-        return "Ice";
-    }
+    public double getMultiplier() { return 1.1; }
 }
