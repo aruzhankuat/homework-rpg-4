@@ -1,6 +1,6 @@
 package com.narxoz.rpg.bridge;
 
 public interface EffectImplementor {
-    int computeDamage(int basePower);
-    String getEffectName();
+    void apply(String skillName, int power);
+    double getMultiplier();
 }
