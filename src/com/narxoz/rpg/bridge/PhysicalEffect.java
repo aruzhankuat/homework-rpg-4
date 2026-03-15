@@ -1,13 +1,8 @@
 package com.narxoz.rpg.bridge;
 
 public class PhysicalEffect implements EffectImplementor {
-    @Override
-    public int computeDamage(int basePower) {
-        return Math.max(0, basePower);
+    public void apply(String name, int power) {
+        System.out.println("Physical effect from " + name + " power: " + power);
     }
-
-    @Override
-    public String getEffectName() {
-        return "Physical";
-    }
+    public double getMultiplier() { return 1.0; }
 }
