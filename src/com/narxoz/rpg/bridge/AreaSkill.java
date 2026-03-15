@@ -1,16 +1,16 @@
 package com.narxoz.rpg.bridge;
-
 import com.narxoz.rpg.composite.CombatNode;
 
 public class AreaSkill extends Skill {
-    public AreaSkill(String skillName, int basePower, EffectImplementor effect) {
-        super(skillName, basePower, effect);
+    public AreaSkill(String name, int mana, EffectImplementor imp) {
+        super(name, mana, imp);
     }
 
     @Override
-    public void cast(CombatNode target) {
-        // TODO: Area Bridge action
-        // Apply resolved damage to a composite target.
-        // Tip: Let Composite classes decide how to distribute AOE damage.
+    public void use(CombatNode target) {
+        int damage = (int) (100 * implementor.getMultiplier());
+        System.out.println("Using AreaSkill: " + skillName);
+        implementor.apply(skillName, damage);
+        target.takeDamage(damage);
     }
 }
