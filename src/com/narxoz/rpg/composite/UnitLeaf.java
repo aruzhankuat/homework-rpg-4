@@ -1,54 +1,33 @@
 package com.narxoz.rpg.composite;
 
-import java.util.Collections;
-import java.util.List;
+public class UnitLeaf implements CombatNode {
+    protected String name;
+    protected String type;
+    protected Stats stats;
 
-public abstract class UnitLeaf implements CombatNode {
-    private final String name;
-    private int health;
-    private final int attackPower;
-
-    protected UnitLeaf(String name, int health, int attackPower) {
+    public UnitLeaf(String name, String type, int hp, int mana, int def) {
         this.name = name;
-        this.health = health;
-        this.attackPower = attackPower;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public int getHealth() {
-        return health;
-    }
-
-    @Override
-    public int getAttackPower() {
-        return isAlive() ? attackPower : 0;
+        this.type = type;
+        this.stats = new Stats(hp, mana, def, 1);
     }
 
     @Override
     public void takeDamage(int amount) {
-        if (!isAlive()) {
-            return;
-        }
-        health = Math.max(0, health - Math.max(0, amount));
+        int resultDamage = amount - stats.defense;
+        if (resultDamage < 0) resultDamage = 0;
+        stats.hp -= resultDamage;
+        if (stats.hp < 0) stats.hp = 0;
+        System.out.println(name + " received " + resultDamage + " damage. Current HP: " + stats.hp);
     }
 
     @Override
-    public boolean isAlive() {
-        return health > 0;
+    public void displayStatus(String indent) {
+        System.out.println(indent + "Unit: " + name + " (" + type + ") HP: " + stats.hp);
     }
 
     @Override
-    public List<CombatNode> getChildren() {
-        return Collections.emptyList();
-    }
+    public boolean isAlive() { return stats.hp > 0; }
 
     @Override
-    public void printTree(String indent) {
-        System.out.println(indent + "- " + name + " [HP=" + health + ", ATK=" + attackPower + "]");
-    }
+    public String getName() { return name; }
 }
