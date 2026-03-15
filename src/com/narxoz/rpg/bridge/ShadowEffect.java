@@ -1,13 +1,8 @@
 package com.narxoz.rpg.bridge;
 
 public class ShadowEffect implements EffectImplementor {
-    @Override
-    public int computeDamage(int basePower) {
-        return Math.max(0, (int) Math.round(basePower * 1.3));
+    public void apply(String name, int power) {
+        System.out.println("Shadow effect from " + name + " power: " + power);
     }
-
-    @Override
-    public String getEffectName() {
-        return "Shadow";
-    }
+    public double getMultiplier() { return 1.3; }
 }
